@@ -1,11 +1,13 @@
 import React from 'react'
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button, Offcanvas } from 'react-bootstrap'
+import {NavLink, Link} from 'react-router-dom'
 
 function Header() {
     return (
-        <Navbar bg="dark" variant="dark" expand={false}>
+        <Navbar bg="dark" variant="dark" >
             <Container fluid>
-                <Navbar.Brand href="#">Olive</Navbar.Brand>
+                {/* <Navbar.Brand href="#">Olive</Navbar.Brand> */}
+                <NavLink className="navbar-brand" to="/">Olive</NavLink>
 
                 {/* <Navbar.Toggle aria-controls="offcanvasNavbar" />
     <Navbar.Offcanvas
@@ -42,7 +44,10 @@ function Header() {
       </Offcanvas.Body>
     </Navbar.Offcanvas> */}
 
-                <Nav><Nav.Link href="#">Sign in</Nav.Link></Nav>
+                <Nav>
+                  <NavLink className="nav-link" to="/signin">Sign in</NavLink>
+                  <NavLink className="nav-link" to="/signup">Sign up</NavLink>
+                </Nav>
             </Container>
         </Navbar>
     )

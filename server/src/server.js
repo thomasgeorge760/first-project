@@ -9,6 +9,8 @@ const app = express();
 
 const userRoutes = require('./routes/userRoute')
 const adminRoutes = require('./routes/adminRoute')
+const categoryRoutes = require('./routes/categoryRoute')
+const productRoutes = require('./routes/productRoute')
 
 // environment variables
 env.config();
@@ -44,7 +46,10 @@ mongoose.connect(
 app.use(express.json());
 
 app.use('/',userRoutes);
+
 app.use('/admin',adminRoutes)
+app.use('/admin/category', categoryRoutes)
+app.use('/admin/product', productRoutes)
 
 
 

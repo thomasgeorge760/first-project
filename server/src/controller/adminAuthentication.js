@@ -15,8 +15,8 @@ exports.signin = (req,res)=>{
         if(error) return res.status(400).json({error})
         if(admin){
             if(admin.authenticate(req.body.password)){
-
-                const adminToken = jwt.sign({_id:admin._id},process.env.JWT_SECRET,{expiresIn:'1h'})
+                
+                const adminToken = jwt.sign({_id:admin._id},process.env.JWT_SECRET,{expiresIn:'1d'})
                 const {
                     _id,
                     firstName,
@@ -39,7 +39,7 @@ exports.signin = (req,res)=>{
 
 
             }else{
-                return response.status(400).json({
+                return res.status(400).json({
                     message:'invalid password'
                 })
             }
@@ -56,11 +56,14 @@ exports.signin = (req,res)=>{
 /* -------------------------------------------------------------------------- */
 
 exports.isSignedIn = (req,res,next)=>{
+    if(!req.headers.authorization) return res.status(400).json({message:'sign in again'})
     const adminToken = req.headers.authorization.split(" ")[1]
+    
     const admin = jwt.verify(adminToken,process.env.JWT_SECRET)
     
-    console.log(admin);
+   
     req.admin = admin;
 
     next();
 }
+

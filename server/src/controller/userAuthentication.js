@@ -2,12 +2,16 @@ const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 
 
+
 /* -------------------------------------------------------------------------- */
 /*                                user sign up                                */
 /* -------------------------------------------------------------------------- */
 
 
 exports.signup = (req,res) => {
+
+    
+
     User.findOne({email:req.body.email}).exec((error,user)=>{
        
         if(error) return res.status(400).json({
@@ -62,7 +66,7 @@ exports.signin = (req,res)=>{
         if(user){
             if(user.authenticate(req.body.password)){
 
-                const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1h'})
+                const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1d'})
                 const {
                     _id,
                     firstName,
@@ -102,10 +106,12 @@ exports.signin = (req,res)=>{
 /* -------------------------------------------------------------------------- */
 
 exports.isSignedIn = (req,res,next)=>{
+    if(!req.headers.authorization) return res.status(400).json({message:'sign in again'})
     const token = req.headers.authorization.split(" ")[1]
+   
     const user = jwt.verify(token,process.env.JWT_SECRET)
     
-    console.log(user);
+   
     req.user = user;
 
     next();

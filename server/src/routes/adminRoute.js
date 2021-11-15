@@ -1,10 +1,12 @@
 const express = require('express');
 const { signin, isSignedIn } = require('../controller/adminAuthentication');
-const router = express.Router();
 
+const { adminSignInValidate, isRequestValidated } = require('../validators/admin&user_validator');
+const router = express.Router();
+ 
 /* --------------------------------- sign in -------------------------------- */
 
-router.post('/signin',signin);
+router.post('/signin',adminSignInValidate,isRequestValidated,signin);
 
 
 

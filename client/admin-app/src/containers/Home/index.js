@@ -5,7 +5,7 @@ function Home(props) {
     return (
         <div>
             <Layout>
-            <h1>Admin home</h1>
+            <h1 className="text-center">Admin home</h1>
             </Layout>
         </div>
     )
