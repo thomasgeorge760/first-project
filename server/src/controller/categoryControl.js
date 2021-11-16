@@ -31,11 +31,17 @@ function createCategoryList(categories,parentId = null){
 
 exports.createCategory = (req,res)=>{
 
-    
+
+   
 
     const categoryObject = {
         name: req.body.name,
         slug: slugify(req.body.name)
+    }
+
+     if(req.file){
+        categoryObject.categoryImage = process.env.API + '/public/' + req.file.filename
+        
     }
 
     if(req.body.parentId){

@@ -11,9 +11,12 @@ const jwt = require('jsonwebtoken')
 
 
 exports.signin = (req,res)=>{
+    
     Admin.findOne({email:req.body.email}).exec((error,admin)=>{
+       
         if(error) return res.status(400).json({error})
         if(admin){
+            console.log('reached')
             if(admin.authenticate(req.body.password)){
                 
                 const adminToken = jwt.sign({_id:admin._id},process.env.JWT_SECRET,{expiresIn:'1d'})

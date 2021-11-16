@@ -18,11 +18,14 @@ exports.adminSignInValidate = [
 ]
 
 exports.isRequestValidated=(req,res,next)=>{
+   
     const error = validationResult(req);
    
     if(error.array()[0]){
+        
     return res.status(400).json({error:error.array()[0].msg})
     }
+    
 
     next()
 }

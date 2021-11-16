@@ -6,6 +6,7 @@ function Input(props) {
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>{props.label}</Form.Label>
             <Form.Control 
+                name={props.name}
                 type={props.type} 
                 placeholder={props.placeholder} 
                 value={props.value}

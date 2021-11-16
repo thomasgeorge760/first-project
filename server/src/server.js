@@ -3,6 +3,8 @@ const express = require('express');
 const env = require('dotenv');
 const mongoose = require('mongoose')
 const app = express();
+const path = require('path')
+const cors = require('cors')
 
 
 //routes
@@ -11,6 +13,8 @@ const userRoutes = require('./routes/userRoute')
 const adminRoutes = require('./routes/adminRoute')
 const categoryRoutes = require('./routes/categoryRoute')
 const productRoutes = require('./routes/productRoute')
+const cartRoutes = require('./routes/cartRoute')
+
 
 // environment variables
 env.config();
@@ -43,9 +47,19 @@ mongoose.connect(
        
     })
 
+/* -------------------------------------------------------------------------- */
+/*                             middlewares section                            */
+/* -------------------------------------------------------------------------- */
+
+
+app.use(cors())
+
 app.use(express.json());
 
+app.use('/public',express.static(path.join(__dirname,'uploads')))
+
 app.use('/',userRoutes);
+app.use('/cart',cartRoutes)
 
 app.use('/admin',adminRoutes)
 app.use('/admin/category', categoryRoutes)
