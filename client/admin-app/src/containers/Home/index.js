@@ -1,11 +1,14 @@
 import React from 'react'
 import Layout from '../../components/layout'
+import { Row, Col, Container } from 'react-bootstrap'
+
+import { NavLink } from 'react-router-dom'
 
 function Home(props) {
     return (
         <div>
-            <Layout>
-            <h1 className="text-center">Admin home</h1>
+            <Layout sidebar>
+                Home
             </Layout>
         </div>
     )

@@ -16,7 +16,7 @@ exports.signin = (req,res)=>{
        
         if(error) return res.status(400).json({error})
         if(admin){
-            console.log('reached')
+            
             if(admin.authenticate(req.body.password)){
                 
                 const adminToken = jwt.sign({_id:admin._id},process.env.JWT_SECRET,{expiresIn:'1d'})
@@ -28,6 +28,7 @@ exports.signin = (req,res)=>{
                     // role,
                     fullName
                 } = admin
+                res.cookie('adminToken', adminToken, { expiresIn: '1d' })
                 res.status(200).json({
                     adminToken,
                     admin:{
@@ -70,3 +71,14 @@ exports.isSignedIn = (req,res,next)=>{
     next();
 }
 
+/* -------------------------------------------------------------------------- */
+/*                              signing out admin                             */
+/* -------------------------------------------------------------------------- */
+
+exports.signout = (req,res) => {
+    
+    res.clearCookie('adminToken')
+    res.status(200).json({
+        message: 'Signout success'
+    })
+}

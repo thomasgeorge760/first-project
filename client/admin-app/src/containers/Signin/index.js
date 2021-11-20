@@ -1,26 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap'
 import Layout from '../../components/layout'
 import Input from '../../components/UI/Input'
-import { login } from '../../actions'
-import { useDispatch } from 'react-redux'
+import { signin } from '../../actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router'
 
 function Signin(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState();
+    const auth = useSelector(state => state.auth);
 
     const dispatch = useDispatch()
 
 
-    const userLogin = (e) => {
+
+
+    const adminSignin = (e) => {
         e.preventDefault();
-        const user = {
+        const admin = {
             email,
             password
         }
-        dispatch(login(user));
+        dispatch(signin(admin));
+    }
+
+    if(auth.authenticate){
+        return <Navigate to="/" />
     }
 
     return (
@@ -29,7 +37,7 @@ function Signin(props) {
                 <Container>
                     <Row style={{ marginTop: "5vh" }}>
                         <Col md={{ span: 6, offset: 3 }}>
-                            <Form onSubmit = {userLogin}>
+                            <Form onSubmit = {adminSignin}>
                                 <Input
                                     label="Email address"
                                     name="email"

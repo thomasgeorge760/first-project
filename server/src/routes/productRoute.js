@@ -22,7 +22,7 @@ const upload = multer({storage})
 
 
 
-router.post('/create', isSignedIn, upload.array('productImage',2), createProduct)
+router.post('/create', isSignedIn, upload.array('productImage',4), createProduct)
 //router.get('/getcategory', isSignedIn, getCategories)
 
 module.exports = router;

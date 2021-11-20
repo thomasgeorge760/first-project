@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const app = express();
 const path = require('path')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 
 
 //routes
@@ -14,6 +15,7 @@ const adminRoutes = require('./routes/adminRoute')
 const categoryRoutes = require('./routes/categoryRoute')
 const productRoutes = require('./routes/productRoute')
 const cartRoutes = require('./routes/cartRoute')
+const initialDataRoutes = require('./routes/adminInitialData')
 
 
 // environment variables
@@ -52,8 +54,8 @@ mongoose.connect(
 /* -------------------------------------------------------------------------- */
 
 
-app.use(cors())
-
+app.use(cors({ credentials: true, origin: '*'}))
+app.use(cookieParser())
 app.use(express.json());
 
 app.use('/public',express.static(path.join(__dirname,'uploads')))
@@ -64,6 +66,7 @@ app.use('/cart',cartRoutes)
 app.use('/admin',adminRoutes)
 app.use('/admin/category', categoryRoutes)
 app.use('/admin/product', productRoutes)
+app.use('/admin',initialDataRoutes)
 
 
 

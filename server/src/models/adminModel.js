@@ -67,9 +67,9 @@ adminSchema.virtual('fullName').get(function(){
 /* -------------------------------------------------------------------------- */
 
 adminSchema.methods = {
-    authenticate: function(password){
+    authenticate: async function(password){
         
-        return bcrypt.compareSync(password,this.hash_password)
+        return await bcrypt.compare(password,this.hash_password)
     }
 }
 

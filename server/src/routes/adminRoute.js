@@ -1,17 +1,16 @@
 const express = require('express');
-const { signin, isSignedIn } = require('../controller/adminAuthentication');
+const { signin, isSignedIn, signout } = require('../controller/adminAuthentication');
 
 const { adminSignInValidate, isRequestValidated } = require('../validators/admin&user_validator');
 const router = express.Router();
  
 /* --------------------------------- sign in -------------------------------- */
 
-router.post('/signin',(req,res,next)=>{
-    
-    next()
-},adminSignInValidate,isRequestValidated,signin);
+router.post('/signin',adminSignInValidate,isRequestValidated,signin);
 
+/* -------------------------------- sign out -------------------------------- */
 
+router.post('/signout', signout)
 
 /* ---------------------------------- home ---------------------------------- */
 
