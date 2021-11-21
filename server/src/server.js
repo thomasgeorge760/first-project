@@ -16,6 +16,8 @@ const categoryRoutes = require('./routes/categoryRoute')
 const productRoutes = require('./routes/productRoute')
 const cartRoutes = require('./routes/cartRoute')
 const initialDataRoutes = require('./routes/adminInitialData')
+const userCategoryRoutes = require('./routes/userCategoryRoute')
+const userProductRoutes = require('./routes/userProductRoute')
 
 
 // environment variables
@@ -62,6 +64,8 @@ app.use('/public',express.static(path.join(__dirname,'uploads')))
 
 app.use('/',userRoutes);
 app.use('/cart',cartRoutes)
+app.use('/category',userCategoryRoutes)
+app.use('/product',userProductRoutes)
 
 app.use('/admin',adminRoutes)
 app.use('/admin/category', categoryRoutes)

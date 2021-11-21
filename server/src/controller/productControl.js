@@ -2,6 +2,7 @@ const Product = require('../models/productModel')
 
 const shortid = require('shortid')
 const slugify = require('slugify')
+const Category = require('../models/categoryModel')
 
 
 exports.createProduct = (req,res)=>{
@@ -40,4 +41,42 @@ exports.createProduct = (req,res)=>{
     })
 
 
+}
+
+exports.getProductsBySlug = (req, res) => {
+    
+    const { slug } = req.params;
+    Category.findOne({ slug:slug })
+    .select('_id')
+    .exec((error, category) => {
+        if(error){
+            return res.status(400).json({error})
+        }
+
+        if(category){
+            Product.find({ category: category._id })
+            .exec((error,products)=>{{
+
+                if(error){
+                    return res.status(400).json({error})
+                }
+
+                if(products.length > 0){
+                    res.status(200).json({
+                        products,
+                        productsByPrice: {
+                            under1000: products.filter(product=>product.price<=1000),
+                            under1500: products.filter(product=>product.price<=1500),
+                        }
+                    })
+                }
+
+                
+            }})
+
+        }
+        
+        
+    })
+   
 }

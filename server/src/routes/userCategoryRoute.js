@@ -1,12 +1,12 @@
 const express = require('express');
 const { isSignedIn } = require('../controller/adminAuthentication');
-const { createProduct } = require('../controller/productControl');
+
+const { createCategory, getCategories } = require('../controller/categoryControl');
+const router = express.Router();
 const multer = require('multer')
 const path = require('path')
 const shortid = require('shortid')
 
-//const { createCategory, getCategories } = require('../controller/categoryControl');
-const router = express.Router();
 
 
 const storage = multer.diskStorage({
@@ -22,8 +22,12 @@ const upload = multer({storage})
 
 
 
-router.post('/create', isSignedIn, upload.array('productImage',4), createProduct)
-// router.get('/products/:slug',)
-//router.get('/getcategory', isSignedIn, getCategories)
+
+/* ---------------------------------- user ---------------------------------- */
+
+router.get('/getcategory', getCategories)
+
+
+
 
 module.exports = router;

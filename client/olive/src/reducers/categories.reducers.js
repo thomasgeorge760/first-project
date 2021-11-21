@@ -1,5 +1,5 @@
 import { categoryConstants } from "../actions/constants"
-import Category from "../containers/category";
+
 
 const initState = {
     categories: [],

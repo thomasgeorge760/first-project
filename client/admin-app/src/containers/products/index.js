@@ -104,8 +104,8 @@ function Products(props) {
                                     <td>{product.price}</td>
                                     <td>{product.quantity}</td>
 
-                                    
                                     <td>{product.category.name}</td>
+                                    
 
                                 </tr>
                             ) : null
