@@ -80,6 +80,26 @@ export default (state = initState, action) => {
                 
             }
             break;
+        case categoryConstants.ADD_NEW_CATEGORY_REQUEST:
+            state={
+                ...state,
+                loading: true
+            }
+            break;
+        case categoryConstants.EDIT_CATEGORY_SUCCESS:
+            
+            const Category = action.payload.category
+            console.log(action.payload.category)
+
+            const UpdatedCategories = buildNewCategories(Category.parentId,state.categories, Category)
+            
+
+            state={
+                ...state,
+                categories: UpdatedCategories,
+                loading:false
+            }
+            break;
     }
 
     return state;

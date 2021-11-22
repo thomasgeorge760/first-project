@@ -27,7 +27,8 @@ exports.signup = (req,res) => {
             firstName,
             lastName,
             email,
-            password = password.toString()
+            password = password.toString(),
+            isBlocked
         } = req.body
        
         const hash_password = await bcrypt.hash(password, 10)
@@ -37,7 +38,8 @@ exports.signup = (req,res) => {
             lastName,
             email,
             hash_password,
-            username: shortId.generate()
+            username: shortId.generate(),
+            isBlocked
         })
         
 
@@ -75,24 +77,22 @@ exports.signin = (req,res)=>{
         if(user){
             if(user.authenticate(req.body.password)){
 
-                const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1d'})
+                const userToken = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1d'})
                 const {
                     _id,
                     firstName,
                     lastName,
-                    email,
-                    // role,
-                    fullName
+                    email
                 } = user
+                res.cookie('userToken', userToken, { expiresIn: '1d' })
                 res.status(200).json({
-                    token,
+                    userToken,
                     user:{
                         _id,
                         firstName,
                         lastName,
-                        email,
-                        // role,
-                        fullName
+                        email
+                        
                     }
                 })
 
@@ -116,7 +116,7 @@ exports.signin = (req,res)=>{
 
 exports.isSignedIn = (req,res,next)=>{
     if(!req.headers.authorization) return res.status(400).json({message:'sign in again'})
-    const token = req.headers.authorization.split(" ")[1]
+    const userToken = req.headers.authorization.split(" ")[1]
    
     const user = jwt.verify(token,process.env.JWT_SECRET)
     
@@ -124,4 +124,16 @@ exports.isSignedIn = (req,res,next)=>{
     req.user = user;
 
     next();
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                user sign out                               */
+/* -------------------------------------------------------------------------- */
+
+exports.signout = (req,res) => {
+    
+    res.clearCookie('userToken')
+    res.status(200).json({
+        message: 'Signout success'
+    })
 }

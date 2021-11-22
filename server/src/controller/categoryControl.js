@@ -70,3 +70,48 @@ exports.getCategories = (req,res) => {
         }
     })
 }
+
+exports.editCategory = async (req,res)=>{
+
+    // console.log(req.body.name)
+
+    const category = await Category.findOne({_id:req.body.categoryId})
+
+    category.name = req.body.name
+
+    await category.save((error,category)=>{
+        if(error){
+            res.status(400).json({ error })
+        }
+        if(category){
+            res.status(201).json({category})
+        }else{
+            res.status(400).json({message:"something went terribily wrong"})
+        }
+    })
+
+}
+
+
+exports.deleteCategory = async (req,res)=>{
+
+    // console.log(req.body.name)
+
+    await Category.deleteOne({_id:req.body.categoryId}).exec((error)=>{
+        res.status(201).json({error})
+    })
+
+    
+
+    // await category.save((error,category)=>{
+    //     if(error){
+    //         res.status(400).json({ error })
+    //     }
+    //     if(category){
+    //         res.status(201).json({category})
+    //     }else{
+    //         res.status(400).json({message:"something went terribily wrong"})
+    //     }
+    // })
+
+}

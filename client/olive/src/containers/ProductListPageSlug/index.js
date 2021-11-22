@@ -23,7 +23,7 @@ function ProductListPage(props) {
                     return (
                         <div className="card">
                             <div className="cardHeader">
-                                <div>{window.location.pathname}Jeans</div>
+                                <div>{window.location.pathname}</div>
                                 <button>View all</button>
                             </div>
                             <div style={{display:'flex'}}>

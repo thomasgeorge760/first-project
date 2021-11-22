@@ -10,6 +10,7 @@ import { getAllCategory, getInitialData, isUserLoggedIn } from './actions'
 import Products from './containers/products';
 import Orders from './containers/orders';
 import Category from './containers/category';
+import Users from './containers/Users';
 
 
 
@@ -38,6 +39,7 @@ function App() {
             <Route path="products" element={<Products/>} />
             <Route path="orders" element={<Orders/>} />
             <Route path="category" element={<Category />} />
+            <Route path="users" element={<Users/>} />
           </Route>
 
           <Route path="/signin" element={<Signin />} />

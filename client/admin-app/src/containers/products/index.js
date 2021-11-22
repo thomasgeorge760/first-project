@@ -88,6 +88,7 @@ function Products(props) {
 
                         
                         <th>Category</th>
+                        <th>Delete</th>
 
                         {/* {Array.from({ length: 12 }).map((_, index) => (
                                         <th key={index}>Table heading</th>
@@ -105,6 +106,7 @@ function Products(props) {
                                     <td>{product.quantity}</td>
 
                                     <td>{product.category.name}</td>
+                                    <td><button className="btn btn-danger">Delete</button></td>
                                     
 
                                 </tr>
@@ -123,6 +125,8 @@ function Products(props) {
                 show={show}
                 handleClose={handleClose}
                 modalSubmit={modalSubmit}
+                modalSubmitLabel="Add product"
+                modalSubmitVariant="success"
                 modalTitle="add new category"
             >
 

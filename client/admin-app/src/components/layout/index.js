@@ -17,10 +17,11 @@ function Layout(props) {
                                 
                                 <li><NavLink className="link" to="/">Home</NavLink></li>
                                 <li><NavLink className="link" to={'/products'}>Products</NavLink></li>
+                                <li><NavLink className="link" to={'/users'}>Users</NavLink></li>
                                 <li><NavLink className="link" to={'/orders'}>Orders</NavLink></li>
                                 <li><NavLink className="link" to={'/salesreport'}>Sales report</NavLink></li>
                                 <li><NavLink className="link" to={'/category'}>Category</NavLink></li>
-                                <li><NavLink className="link" to={'/products'}>Products</NavLink></li>
+                                
                             </ul>
                         </Col>
                         <Col md={10} style={{ marginLeft: 'auto', paddingTop: '60px' }}>{props.children}</Col>

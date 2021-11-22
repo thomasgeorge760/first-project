@@ -1,7 +1,7 @@
 const express = require('express');
 const { isSignedIn } = require('../controller/adminAuthentication');
 
-const { createCategory, getCategories } = require('../controller/categoryControl');
+const { createCategory, getCategories, editCategory, deleteCategory } = require('../controller/categoryControl');
 const router = express.Router();
 const multer = require('multer')
 const path = require('path')
@@ -25,6 +25,8 @@ const upload = multer({storage})
 
 router.post('/create', isSignedIn, upload.single('categoryImage'), createCategory)
 router.get('/getcategory', isSignedIn, getCategories)
+router.post('/edit',isSignedIn, upload.single('categoryImage'), editCategory)
+router.post('/delete',isSignedIn, upload.single('categoryImage'), deleteCategory)
 
 
 

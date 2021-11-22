@@ -1,5 +1,5 @@
 const express = require('express');
-const { signin, isSignedIn, signout } = require('../controller/adminAuthentication');
+const { signin, isSignedIn, signout, blockUser } = require('../controller/adminAuthentication');
 
 const { adminSignInValidate, isRequestValidated } = require('../validators/admin&user_validator');
 const router = express.Router();
@@ -19,5 +19,9 @@ router.post('/home',isSignedIn,(req,res)=>{
         admin:'admin home'
     })
 })
+
+/* ------------------------------- block user ------------------------------- */
+
+router.post('/blockUser',isSignedIn,blockUser)
 
 module.exports = router;

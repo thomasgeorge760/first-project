@@ -1,5 +1,6 @@
 const Admin = require('../models/adminModel')
 const jwt = require('jsonwebtoken')
+const User = require('../models/userModel')
 
 
 
@@ -81,4 +82,33 @@ exports.signout = (req,res) => {
     res.status(200).json({
         message: 'Signout success'
     })
+}
+
+
+/* -------------------------------------------------------------------------- */
+/*                                blocking user                               */
+/* -------------------------------------------------------------------------- */
+
+exports.blockUser = async (req,res) => {
+    
+    const user = await User.findOne({_id:req.body._id})
+        
+        if(user){
+            if(user.isBlocked) user.isBlocked = false;
+            else user.isBlocked = true;
+
+            await user.save((error,user) => {
+                if(error){
+                    res.status(400).json({error})
+                }
+                if(user){
+                    console.log(user)
+                    res.status(201).json({user})
+                }
+            })
+
+        }else{
+            res.status(400).json({message: "user not found"})
+        }
+
 }

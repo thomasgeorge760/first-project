@@ -47,3 +47,49 @@ export const addCategory = (form) => {
         console.log(res);
     }
 }
+
+export const editCategory = (form) => {
+    // console.log(form)
+    return async dispatch => {
+
+        dispatch({
+            type: categoryConstants.EDIT_CATEGORY_REQUEST
+        })
+        const res = await axios.post('admin/category/edit',form);
+        if(res.status === 201){
+            dispatch({
+                type: categoryConstants.EDIT_CATEGORY_SUCCESS,
+                payload:{ category: res.data.category} 
+            })
+        }else{
+            dispatch({
+                type: categoryConstants.EDIT_CATEGORY_FAILURE,
+                payload: res.data.error
+            })
+        }
+        console.log(res);
+    }
+}
+
+export const deleteCategory = (form) => {
+    // console.log(form)
+    return async dispatch => {
+        
+        dispatch({
+            type: categoryConstants.DELETE_CATEGORY_REQUEST
+        })
+        const res = await axios.post('admin/category/delete',form);
+        if(res.status === 201){
+            dispatch({
+                type: categoryConstants.DELETE_CATEGORY_SUCCESS,
+                payload:{ category: res.data.category} 
+            })
+        }else{
+            dispatch({
+                type: categoryConstants.DELETE_CATEGORY_FAILURE,
+                payload: res.data.error
+            })
+        }
+        console.log(res);
+    }
+}

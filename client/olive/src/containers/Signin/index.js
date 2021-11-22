@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap'
-import Layout from '../../components/layout'
+
 import Input from '../../components/UI/Input'
 import { signin } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router'
+import Layout from '../../components/Layout'
 
 function Signin(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState();
-    const auth = useSelector(state => state.auth);
+    const user = useSelector(state => state.user.user);
 
     const dispatch = useDispatch()
 
 
 
 
-    const adminSignin = (e) => {
+    const userSignin = (e) => {
         e.preventDefault();
-        const admin = {
+        const user = {
             email,
-            password
-            
+            password      
         }
-        dispatch(signin(admin));
+        dispatch(signin(user));
     }
 
-    if(auth.authenticate){
+    if(user.email){
         return <Navigate to="/" />
     }
 
@@ -38,7 +38,7 @@ function Signin(props) {
                 <Container>
                     <Row style={{ marginTop: "5vh" }}>
                         <Col md={{ span: 6, offset: 3 }}>
-                            <Form onSubmit = {adminSignin}>
+                            <Form onSubmit = {userSignin}>
                                 <Input
                                     label="Email address"
                                     name="email"
@@ -59,7 +59,7 @@ function Signin(props) {
                                 />
                                 
                                 <Button variant="primary" type="submit">
-                                    Submit
+                                    Log in
                                 </Button>
                             </Form>
                         </Col>

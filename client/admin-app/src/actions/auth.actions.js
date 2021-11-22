@@ -8,6 +8,7 @@ export const signin = (admin) => {
 
         const res = await axios.post('/admin/signin',{
             ...admin
+            
         });
 
 
@@ -41,7 +42,7 @@ export const isUserLoggedIn = () => {
     return async dispatch => {
         const adminToken = localStorage.getItem('adminToken');
         if(adminToken){
-            const admin = JSON.parse(localStorage.getItem('user'));
+            const admin = JSON.parse(localStorage.getItem('admin'));
             dispatch({
                 type: authConstants.LOGIN_SUCCESS,
                 payload: {
