@@ -14,7 +14,7 @@ router.post('/signup',userSignupValidate,isRequestValidated,signup);
 
 /* ---------------------------------- home ---------------------------------- */
 
-router.get('/',isSignedIn,(req,res)=>{
+router.get('/',(req,res)=>{
     res.status(200).json({
         user:'user home'
     })

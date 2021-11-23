@@ -5,9 +5,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import ProductListPage from './containers/ProductListPageSlug';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Signin from './containers/Signin';
+import Signup from './containers/Signup';
 import PrivateRoute from './components/HOC/PrivateRoute';
 import { useDispatch, useSelector } from 'react-redux';
 import { isUserLoggedIn } from './actions';
+import ProductDetail from './containers/ProductDetail';
 
 function App() {
 
@@ -33,6 +35,8 @@ function App() {
           </Route> */}
           <Route path="/" element={<HomePage />} />
           <Route path="/signin" element={<Signin/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/product/:id" element={<ProductDetail/>}/>
           <Route path="productlistbyslug/:slug" element={<ProductListPage />}/>
         </Routes>
       </Router>

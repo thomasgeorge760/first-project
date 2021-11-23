@@ -17,6 +17,7 @@ function Users(props) {
   
 
     const dispatch = useDispatch();
+    
 
     const BlockUser = (user) => {
         
@@ -42,6 +43,7 @@ function Users(props) {
 
                         
                         <th>Category</th>
+                        
                         <th>Block</th>
 
                        

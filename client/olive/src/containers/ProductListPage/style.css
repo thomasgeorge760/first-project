@@ -1,0 +1,90 @@
+
+
+
+
+
+.Card{
+    width: 90%;
+    height: 350px;
+    margin: 10px 10px;
+    
+    background-color: rgba(184, 178, 178, 0.466);
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    box-shadow: 0 0 2px -2px grey;
+}
+
+.cardHeader{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid #cecece;
+    
+}
+
+.cardHeader p{
+    color: honeydew;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.cardHeader button{
+    border-radius: 5px;
+    border: none;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(92, 72, 72);
+    color: honeydew;
+    font-weight: bold;
+}
+
+.productmain{
+    margin-top: 5px;
+    
+}
+
+.productContainer{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    width: 200px;
+    height: 260px;
+    margin-top: 15px;
+    margin: 5px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.link{
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover{
+    color: black;
+}
+
+.productContainer .productImgContainer{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.productContainer .productImgContainer img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    
+}
+
+.productInfo{
+    text-align: center;
+    font-size: 12px;
+}
+
+.productPrice{
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+

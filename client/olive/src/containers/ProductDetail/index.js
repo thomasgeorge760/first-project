@@ -1,34 +1,36 @@
 import React, { useEffect } from 'react'
+import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductsBySlug } from '../../actions';
+import { Navigate, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import { getAllProducts, getProduct, getProductsBySlug } from '../../actions';
 import Layout from '../../components/Layout'
 import { generatePublicUrl } from '../../urlConfig';
 import './style.css'
 
-function ProductListPageBySlug(props) {
+function ProductDetail(props) {
 
-    const product = useSelector(state => state.product)
+    const product = useSelector(state => state.product.product)
     const dispatch = useDispatch();
 
+    const { id } = useParams()
+
     useEffect(() => {
-        console.log(props)
+        console.log("id")
 
-        dispatch(getProductsBySlug(window.location.pathname))
+        dispatch(getProduct(id))
     }, [])
+    if (product.name) {
+        return (
+            <Layout>
+                <Container>
+                    <Row>
+                        <Col md={12}>
+                            
 
-    return (
-        <Layout>
-            {
-                Object.keys(product.productsByPrice).map((key, index) => {
-                    return (
-                        <div className="card">
-                            <div className="cardHeader">
-                                <div>{window.location.pathname}</div>
-                                <button>View all</button>
-                            </div>
-                            <div style={{display:'flex'}}>
-                                {
-                                    product.productsByPrice[key].map(product =>
+                                <div className="productmain" style={{ display: 'flex' }}>
+                                    {
+
                                         <div className="productContainer">
                                             <div className="productImgContainer">
                                                 <img src={generatePublicUrl(product.productImage[0].img)} alt=""></img>
@@ -44,18 +46,29 @@ function ProductListPageBySlug(props) {
                                                 <div className="productPrice">{product.price}</div>
                                             </div>
                                         </div>
-                                    )
-                                }
 
-                            </div>
+                                    }
+                                    <Link to="/cart">Cart</Link>
 
-                        </div>
-                    )
-                })
-            }
+                                </div>
 
+
+                            
+                        </Col>
+                       
+                    </Row>
+                </Container>
+            </Layout>
+
+        )
+    }
+    return (
+        <Layout>
+            <Link to="/">Home</Link>
+            <h1>product not found</h1>
         </Layout>
     )
+
 }
 
-export default ProductListPageBySlug
+export default ProductDetail

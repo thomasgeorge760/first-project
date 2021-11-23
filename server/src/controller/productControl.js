@@ -80,3 +80,46 @@ exports.getProductsBySlug = (req, res) => {
     })
    
 }
+
+exports.getAllProducts = (req, res) => {
+
+
+
+    Product.find({}).exec((error,products) => {
+        if(error){
+            return res.status(400).json({error})
+        }
+        if(products){
+            
+            res.status(200).json({products})
+        }else{
+            res.status(400).json({message: "something went wrong"})
+        }
+    })
+    
+    
+   
+}
+
+exports.getProduct = (req, res) => {
+    
+    Product.findOne({_id: req.params.id}).exec((error,product) => {
+        if(error){
+            return res.status(400).json({error})
+        }
+        if(product){
+            res.status(200).json({product})
+        }else{
+            res.status(400).json({message: "something went wrong"})
+        }
+    })
+}
+
+exports.deleteProduct = (req, res) => {
+    Product.deleteOne({_id: req.body._id}).exec((error)=>{
+        if(error){
+            res.status(400).json({error})
+        }
+        res.status(200).json({message:"success"})
+    })
+}

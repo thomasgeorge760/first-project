@@ -4,7 +4,7 @@ import { Col, Container, Row, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Button from '@restart/ui/esm/Button';
 import Input from '../../components/UI/Input';
-import { addProduct } from '../../actions';
+import { addProduct, deleteProduct } from '../../actions';
 import Modal from '../../components/UI/modal'
 import './style.css'
 import { generatePublicUrl } from '../../urlConfig';
@@ -23,6 +23,14 @@ function Products(props) {
     const product = useSelector(state => state.products)
 
     const dispatch = useDispatch();
+
+    /* ---------------------------- deleting product ---------------------------- */
+
+    const DeleteProduct = (product) => {
+        dispatch(deleteProduct(product))
+    }
+
+    /* ----------------------------- handling modal ----------------------------- */
 
     const handleClose = () => {
 
@@ -53,6 +61,10 @@ function Products(props) {
         setShow(false);
     }
 
+
+    /* ------------------------- creating category list ------------------------- */
+
+
     const createCategoryList = (categories, options = []) => {
         for (let category of categories) {
             options.push({ value: category._id, name: category.name })
@@ -63,6 +75,8 @@ function Products(props) {
         return options;
     }
 
+    /* ------------------------ handling product pictures ----------------------- */
+
     const handleProductPictures = (e) => {
 
         setProductPictures([
@@ -71,7 +85,7 @@ function Products(props) {
         ])
     }
 
-    //console.log(productPictures);
+    /* --------------------------- rendering products --------------------------- */
 
     const RenderProducts = () => {
 
@@ -81,14 +95,14 @@ function Products(props) {
             <Table style={{ fontSize: 12 }} responsive>
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th></th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Quantity</th>
 
                         
                         <th>Category</th>
-                        <th>Delete</th>
+                        
 
                         {/* {Array.from({ length: 12 }).map((_, index) => (
                                         <th key={index}>Table heading</th>
@@ -99,14 +113,16 @@ function Products(props) {
                     {
                         product.products.length > 0 ?
                             product.products.map(product =>
-                                <tr onClick={() => showProductDetailsModal(product)}>
-                                    <td>1</td>
+                                <tr>
+                                    <td></td>
                                     <td>{product.name}</td>
                                     <td>{product.price}</td>
                                     <td>{product.quantity}</td>
 
                                     <td>{product.category.name}</td>
-                                    <td><button className="btn btn-danger">Delete</button></td>
+                                    <td><button onClick={() => showProductDetailsModal(product)} className="btn btn-primary">Details</button></td>
+                                    <td><button className="btn btn-warning">Edit</button></td>
+                                    <td><button onClick={()=>DeleteProduct(product)} className="btn btn-danger">Delete</button></td>
                                     
 
                                 </tr>
@@ -118,6 +134,8 @@ function Products(props) {
             </Table>
         )
     }
+
+    /* ----------------------------- rendering add product modal ---------------------------- */
 
     const renderAddProductModal = () => {
         return (
@@ -175,6 +193,8 @@ function Products(props) {
             </Modal>
         )
     }
+
+    /* --------------- handling and rendering product detail modal -------------- */
 
     const handleCloseProductDetailsModal = () => {
 

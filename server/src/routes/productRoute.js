@@ -1,6 +1,6 @@
 const express = require('express');
 const { isSignedIn } = require('../controller/adminAuthentication');
-const { createProduct } = require('../controller/productControl');
+const { createProduct, deleteProduct } = require('../controller/productControl');
 const multer = require('multer')
 const path = require('path')
 const shortid = require('shortid')
@@ -23,6 +23,9 @@ const upload = multer({storage})
 
 
 router.post('/create', isSignedIn, upload.array('productImage',4), createProduct)
+
+router.post('/delete',isSignedIn,deleteProduct)
+
 // router.get('/products/:slug',)
 //router.get('/getcategory', isSignedIn, getCategories)
 

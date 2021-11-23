@@ -11,6 +11,7 @@ import Products from './containers/products';
 import Orders from './containers/orders';
 import Category from './containers/category';
 import Users from './containers/Users';
+import SalesReport from './containers/sales';
 
 
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="orders" element={<Orders/>} />
             <Route path="category" element={<Category />} />
             <Route path="users" element={<Users/>} />
+            <Route path="salesreport" element={<SalesReport/>} />
           </Route>
 
           <Route path="/signin" element={<Signin />} />

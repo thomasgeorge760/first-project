@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import { Nav } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { signout } from '../../actions';
 import './style.css'
 
 function Header(props) {
 
-    const user = useSelector(state => state.user.user);
+    const userEmail = localStorage.getItem('userEmail')
+    const userFirstName = localStorage.getItem('userFirstName')
+    
 
     const dispatch = useDispatch();
 
     const userSignout = () => {
         dispatch(signout())
+        window.location.reload()
       }
     
       const renderNonLoggedInLinks = () => {
@@ -38,7 +41,9 @@ function Header(props) {
     return (
         <div className="header">
             <div className="headerLeft">
+              <Link className="link" to="/">
                 <p>Olive</p>
+                </Link>
             </div>
             <div className="headerMiddle">
                 <input placeholder="Shirt, jeans etc" type="search"></input>
@@ -49,14 +54,14 @@ function Header(props) {
                     <button className="dropbtn">more</button>
                     <div className="dropdown-content">
 
-                    {user.email ? renderLoggedInLinks() : renderNonLoggedInLinks()}
+                    {userEmail ? renderLoggedInLinks() : renderNonLoggedInLinks()}
                         
 
                         <a href="#">Offers</a>
                     </div>
                 </div>
                 <div className="greeting">
-                    {user.email ? `hai, ${user.firstName}` : null}
+                    {userEmail ? `hai, ${userFirstName}` : null}
                 </div>
 
             </div>

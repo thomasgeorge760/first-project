@@ -10,15 +10,21 @@
 .headerLeft{
     width: 30%;
     height: 100%;
+   
+}
+
+.link{
+    text-decoration: none;
 }
 
 .headerLeft p{
 
     color: honeydew;
-    font-size: 2vw;
+    font-size: 25px;
     font-weight: bolder;
     font-style: italic;
     margin-left: 10%;
+    
 }
 
 .headerMiddle{

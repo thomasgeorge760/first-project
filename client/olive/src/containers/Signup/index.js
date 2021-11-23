@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap'
-import Layout from '../../components/layout'
+import Layout from '../../components/Layout'
 import Input from '../../components/UI/Input'
 import { useSelector, useDispatch } from 'react-redux'
 import { Navigate } from 'react-router'
@@ -13,7 +13,7 @@ function Signup(props) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const auth = useSelector(state => state.auth);
-    const user = useSelector(state => state.user);
+    const user = useSelector(state => state.user.user);
 
     const dispatch = useDispatch()
 
@@ -26,19 +26,20 @@ function Signup(props) {
             password
         }
         dispatch(signup(user));
+        
     }
 
-    if(auth.authenticate){
+    if(user.email){
         return <Navigate to="/" />
     }
     
-    if(user.loading){
-        return (
-            <div class="spinner-border" role="status">
-  <span class="sr-only"></span>
-</div>
-        )
-    }
+//     if(user.loading){
+//         return (
+//             <div class="spinner-border" role="status">
+//   <span class="sr-only"></span>
+// </div>
+//         )
+//     }
 
     return (
         <div>

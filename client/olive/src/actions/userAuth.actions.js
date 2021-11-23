@@ -17,6 +17,8 @@ export const signin = (user) => {
             const { userToken, user } = res.data;
             localStorage.setItem('userToken',userToken);
             localStorage.setItem('user', JSON.stringify(user))
+            localStorage.setItem('userEmail',user.email)
+            localStorage.setItem('userFirstName',user.firstName)
             dispatch({
                 type: userAuthConstants.LOGIN_SUCCESS,
                 payload: {
@@ -25,10 +27,11 @@ export const signin = (user) => {
             })
         }else{
             if(res.status === 400){
+                
                 dispatch({
                     type: userAuthConstants.LOGIN_FAILURE,
                     payload: {
-                        error: res.data.error
+                        message: res.data.message
                     }
                 })
             }

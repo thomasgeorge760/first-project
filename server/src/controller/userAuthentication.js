@@ -51,11 +51,11 @@ exports.signup = (req,res) => {
             }
             if(data){
                 user=data
-                const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1d'})
+                const userToken = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1d'})
                 
                 console.log(data)
                 return res.status(201).json({
-                    token,
+                    userToken,
                     user
                 })
             }
@@ -75,6 +75,11 @@ exports.signin = (req,res)=>{
     User.findOne({email:req.body.email}).exec((error,user)=>{
         if(error) return res.status(400).json({error})
         if(user){
+            
+            if(user.isBlocked){
+                const message = "user blocked contact admin";
+                return res.status(400).json({message})
+            }
             if(user.authenticate(req.body.password)){
 
                 const userToken = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1d'})
