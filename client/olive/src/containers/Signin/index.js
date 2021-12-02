@@ -6,6 +6,7 @@ import { signin } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router'
 import Layout from '../../components/Layout'
+import './style.css'
 
 
 function Signin(props) {
@@ -34,7 +35,7 @@ function Signin(props) {
     }
 
     return (
-        <div>
+        <div style={{height:'100vh'}}>
             <Layout>
                 <Container>
                     <Row style={{ marginTop: "5vh" }}>

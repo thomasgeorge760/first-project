@@ -17,6 +17,11 @@
     text-decoration: none;
 }
 
+.cartLink{
+    text-decoration: none;
+    color: honeydew;
+}
+
 .headerLeft p{
 
     color: honeydew;

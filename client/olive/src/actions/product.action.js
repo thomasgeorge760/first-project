@@ -32,7 +32,7 @@ export const getAllProducts = () => {
 }
 
 export const getProduct = (id) => {
-    console.log('varunnund')
+    
     return async dispatch => {
         
         const res = await axios.get(`/product/single/${id}`);

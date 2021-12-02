@@ -19,6 +19,27 @@ const userSchema = new mongoose.Schema({
         unique:true,
         index:true
     },
+    address:[{
+        fullName:{
+            type: String,
+            
+        },
+        houseName:{
+            type: String,
+        },
+        locality:{
+            type: String,
+        },
+        town:{
+            type: String,
+        },
+        landmarks:{
+            type: String
+        },
+        pincode:{
+            type: Number
+        }
+    }],
     email:{
         type:String,
         required:true,
@@ -71,11 +92,10 @@ userSchema.virtual('fullName').get(function(){
 /*                 comparing entered password with db password                */
 /* -------------------------------------------------------------------------- */
 
-userSchema.methods = {
-    authenticate: async function(password){
+userSchema.methods.authenticate =async function(password){
         
         return await bcrypt.compare(password,this.hash_password)
     }
-}
+
 
 module.exports = mongoose.model('User',userSchema)

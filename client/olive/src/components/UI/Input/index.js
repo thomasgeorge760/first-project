@@ -4,7 +4,7 @@ import {Form} from 'react-bootstrap'
 function Input(props) {
     return (
         <Form.Group className="mb-3">
-            <Form.Label>{props.label}</Form.Label>
+            <Form.Label style={{color:'black'}}>{props.label}</Form.Label>
             <Form.Control 
                 name={props.name}
                 type={props.type} 
